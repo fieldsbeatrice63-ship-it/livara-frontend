@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livara</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff7ff, #f5f8ff, #fff2f8);
+      color: #15152f;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 245px;
+      background: rgba(255, 255, 255, 0.82);
+      border-right: 1px solid #eadcff;
+      padding: 28px 20px;
+    }
+
+    .logo {
+      font-size: 30px;
+      letter-spacing: 8px;
+      font-weight: 700;
+      color: #15152f;
+      margin-bottom: 45px;
+    }
+
+    .logo span {
+      color: #9b4dff;
+    }
+
+    .nav-item {
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      font-size: 15px;
+      cursor: pointer;
+      color: #252544;
+    }
+
+    .nav-item.active {
+      background: #eadcff;
+      color: #7b2fff;
+      font-weight: 700;
+    }
+
+    .help-card {
+      margin-top: 50px;
+      padding: 22px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid #eadcff;
+      box-shadow: 0 12px 30px rgba(120, 80, 180, 0.08);
+    }
+
+    .help-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .help-card p {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 18px;
+    }
+
+    .help-card button {
+      width: 100%;
+      border: none;
+      padding: 13px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8b3dff, #c54dff);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .main {
+      flex: 1;
+      padding: 35px 45px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 35px;
+      font-size: 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 20px 0 25px;
+    }
+
+    .symbol {
+      font-size: 46px;
+      color: #b047ff;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      letter-spacing: 14px;
+      background: linear-gradient(90deg, #6d63ff, #ec4dbb);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #252544;
+    }
+
+    .chat-bubble {
+      max-width: 560px;
+      margin: 18px auto 30px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid #eadcff;
+      padding: 24px;
+      border-radius: 24px;
+      text-align: left;
+      box-shadow: 0 14px 35px rgba(120, 80, 180, 0.08);
+      line-height: 1.6;
+    }
+
+    .input-wrap {
+      display: flex;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid #eadcff;
+      border-radius: 22px;
+      padding: 16px;
+      gap: 14px;
+    }
+
+    .input-wrap input {
+      flex: 1;
+      border: 1px solid #eadcff;
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 16px;
+      outline: none;
+      color: #15152f;
+      background: white;
+    }
+
+    .input-wrap button {
+      width: 64px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #8b3dff, #c54dff);
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .section-title {
+      max-width: 900px;
+      margin: 0 auto 16px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .cards {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #eadcff;
+      border-radius: 20px;
+      padding: 22px 14px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(120, 80, 180, 0.07);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 25px;
+    }
+
+    .orange { background: #ff9f1c; }
+    .green { background: #42c477; }
+    .purple { background: #8b3dff; }
+    .blue { background: #4b8cff; }
+    .pink { background: #d941a6; }
+
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.4;
+      min-height: 50px;
+    }
+
+    .card button {
+      margin-top: 14px;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      background: #f3e8ff;
+      color: #7b2fff;
+    }
+
+    .response-box {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      background: white;
+      border: 1px solid #eadcff;
+      border-radius: 22px;
+      padding: 22px;
+      display: none;
+    }
+
+    .response-box h3 {
+      margin-bottom: 10px;
+      color: #7b2fff;
+    }
+
+    .option-buttons {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .option-buttons button {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 15px;
+      background: #f3e8ff;
+      color: #7b2fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #eadcff;
+      border-radius: 18px;
+      padding: 18px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo"><span>∞</span> LIVARA</div>
+
+      <div class="nav-item active">Home</div>
+      <div class="nav-item">Food</div>
+      <div class="nav-item">Money</div>
+      <div class="nav-item">Credit & Documents</div>
+      <div class="nav-item">Housing</div>
+      <div class="nav-item">Work</div>
+
+      <div class="help-card">
+        <h3>Need Immediate Help?</h3>
+        <p>Livara is here to guide you toward the next best step.</p>
+        <button onclick="focusInput()">Talk to Livara</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <strong>Hello 👋</strong>
+      </div>
+
+      <section class="hero">
+        <div class="symbol">∞</div>
+        <h1>LIVARA</h1>
+        <p>Your AI Assistant for Real-Life Support</p>
+      </section>
+
+      <div class="chat-bubble">
+        <strong>Hi, I’m Livara.</strong><br>
+        I can help you find the right resources, documents, and guidance.
+        What do you need today?
+      </div>
+
+      <div class="input-wrap">
+        <input id="livaraInput" type="text" placeholder="Type your request here..." />
+        <button onclick="askLivara()">➤</button>
+      </div>
+
+      <div id="livaraResponse" class="response-box">
+        <h3>Livara says:</h3>
+        <p id="responseText"></p>
+        <div id="optionButtons" class="option-buttons"></div>
+      </div>
+
+      <div class="section-title">How can I help you today?</div>
+
+      <section class="cards">
+        <div class="card">
+          <div class="icon orange">🍽</div>
+          <h3>Food</h3>
+          <p>Find meals, groceries, and food support.</p>
+          <button onclick="quickAsk('I need food')">Explore</button>
+        </div>
+
+        <div class="card">
+          <div class="icon green">$</div>
+          <h3>Money</h3>
+          <p>Get financial help, funding, and budgeting.</p>
+          <button onclick="quickAsk('I need money')">Explore</button>
+        </div>
+
+        <div class="card">
+          <div class="icon purple">📄</div>
+          <h3>Credit & Documents</h3>
+          <p>Letters, disputes, and credit help.</p>
+          <button onclick="quickAsk('I need help with my credit')">Explore</button>
+        </div>
+
+        <div class="card">
+          <div class="icon blue">🏠</div>
+          <h3>Housing</h3>
+          <p>Find housing, shelter, and support.</p>
+          <button onclick="quickAsk('I need housing help')">Explore</button>
+        </div>
+
+        <div class="card">
+          <div class="icon pink">💼</div>
+          <h3>Work</h3>
+          <p>Find jobs, build resumes, and prepare.</p>
+          <button onclick="quickAsk('I need a job')">Explore</button>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        You’re not alone. Livara is here to help you take the next step.
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const LIVARA_BACKEND_URL = "https://livara-backend.onrender.com/api/livara/decide";
+
+    function focusInput() {
+      document.getElementById("livaraInput").focus();
+    }
+
+    function quickAsk(message) {
+      document.getElementById("livaraInput").value = message;
+      askLivara();
+    }
+
+    async function askLivara() {
+      const input = document.getElementById("livaraInput");
+      const responseBox = document.getElementById("livaraResponse");
+      const responseText = document.getElementById("responseText");
+      const optionButtons = document.getElementById("optionButtons");
+
+      const message = input.value.trim();
+
+      if (!message) {
+        responseBox.style.display = "block";
+        responseText.textContent = "Tell me what you need today, and I’ll help narrow it down.";
+        optionButtons.innerHTML = "";
+        return;
+      }
+
+      responseBox.style.display = "block";
+      responseText.textContent = "Livara is thinking...";
+      optionButtons.innerHTML = "";
+
+      try {
+        const res = await fetch(LIVARA_BACKEND_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+          responseText.textContent = data.error || "Something went wrong.";
+          return;
+        }
+
+        responseText.textContent = data.reply;
+
+        data.options.forEach(option => {
+          const btn = document.createElement("button");
+          btn.textContent = option;
+          btn.onclick = () => {
+            input.value = option;
+            responseText.textContent = "You selected: " + option;
+          };
+          optionButtons.appendChild(btn);
+        });
+
+      } catch (error) {
+        responseText.textContent = "I could not connect to Livara right now. Please check the backend URL.";
+      }
+    }
+  </script>
+</body>
+</html>
