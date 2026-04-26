@@ -471,8 +471,10 @@ function startLivaraGuidance() {
 
   responseBox.style.display = "block";
   responseText.textContent =
+    responseBox.scrollIntoView({ behavior: "smooth" });
     "Let’s get you where you need to go. What do you want help with first?";
 
+  
   optionButtons.innerHTML = "";
 
   const options = [
@@ -519,7 +521,7 @@ function startLivaraGuidance() {
     }
 
     responseBox.style.display = "block";
-    responseText.textContent = "Livara is thinking...";
+   responseText.textContent = "Got it. Let me find the best options for you...";
     optionButtons.innerHTML = "";
 
     try {
@@ -626,14 +628,102 @@ if (key === "work") {
 
          // EMERGENCY HOUSING
 if (key === "emergency housing") {
-  responseText.textContent = "Let’s get you somewhere safe and immediate.";
+  responseText.textContent =
+    "Let’s get you somewhere safe and immediate. You can look for temporary stay options below, and I can also help you prepare documents or find assistance.";
 
   optionButtons.innerHTML = "";
 
   const subOptions = [
     { text: "Extended stays near me", link: ACTION_LINKS["extended stays near me"] },
     { text: "Airbnb near me", link: ACTION_LINKS["airbnb near me"] },
-    { text: "Housing assistance", link: ACTION_LINKS["housing assistance"] }
+    { text: "Housing assistance", link: ACTION_LINKS["housing assistance"] },
+    { text: "Create proof of income", link: FORMATFLOW_URL },
+    { text: "Create landlord letter", link: FORMATFLOW_URL }
+  ];
+
+  subOptions.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      window.location.href = opt.link;
+    };
+    optionButtons.appendChild(btn);
+  });
+
+  return;
+}
+         if (key === "find jobs") {
+  responseText.textContent =
+    "Let’s move you toward work. You can search jobs now, or prepare your resume and interview next.";
+
+  optionButtons.innerHTML = "";
+
+  const subOptions = [
+    { text: "Search jobs now", link: ACTION_LINKS["find jobs"] },
+    { text: "Build resume", link: FORMATFLOW_URL },
+    { text: "Practice interview", link: ACTION_LINKS["practice interview"] }
+  ];
+
+  subOptions.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      window.location.href = opt.link;
+    };
+    optionButtons.appendChild(btn);
+  });
+
+  return;
+}
+
+         if (key === "credit dispute letter" || key === "debt validation letter" || key === "proof of income letter") {
+  responseText.textContent =
+    "I’ll take you to FormatFlow so you can create the right document. After that, you can download, print, or continue with verified delivery if available.";
+
+  optionButtons.innerHTML = "";
+
+  const btn = document.createElement("button");
+  btn.textContent = "Open FormatFlow";
+  btn.onclick = () => {
+    window.location.href = FORMATFLOW_URL;
+  };
+  optionButtons.appendChild(btn);
+
+  return;
+}
+         if (key === "find income") {
+  responseText.textContent =
+    "Let’s focus on ways to bring income in. You can search jobs, look for gig work, or prepare a resume.";
+
+  optionButtons.innerHTML = "";
+
+  const subOptions = [
+    { text: "Search jobs", link: "https://www.indeed.com" },
+    { text: "Find gig work", link: "https://www.snagajob.com" },
+    { text: "Build resume", link: FORMATFLOW_URL }
+  ];
+
+  subOptions.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      window.location.href = opt.link;
+    };
+    optionButtons.appendChild(btn);
+  });
+
+  return;
+}
+         if (key === "find food" || key === "food") {
+  responseText.textContent =
+    "Let’s find something that works for you. Choose what you’re looking for.";
+
+  optionButtons.innerHTML = "";
+
+  const subOptions = [
+    { text: "Fast food", link: ACTION_LINKS["fast"] },
+    { text: "Affordable grocery", link: ACTION_LINKS["affordable"] },
+    { text: "Healthy grocery", link: ACTION_LINKS["healthy"] }
   ];
 
   subOptions.forEach(opt => {
