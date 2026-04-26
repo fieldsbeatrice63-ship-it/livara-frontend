@@ -395,14 +395,13 @@
   const LIVARA_BACKEND_URL = "https://livara-backend.onrender.com/api/livara/decide";
 
   const FORMATFLOW_URL = "https://getformatflow.com";
- const ACTION_LINKS = {
+const ACTION_LINKS = {
   "credit dispute letter": FORMATFLOW_URL,
   "debt validation letter": FORMATFLOW_URL,
   "proof of income letter": FORMATFLOW_URL,
 
   "pay a bill": "https://www.211.org",
   "find income": "https://www.indeed.com",
-  "get funding": "https://www.sba.gov/funding-programs/loans",
 
   "find jobs": "https://www.indeed.com",
   "find housing": "https://www.zillow.com",
@@ -410,7 +409,6 @@
   "affordable": "https://www.google.com/maps/search/cheap+food+near+me",
   "healthy": "https://www.google.com/maps/search/healthy+food+near+me"
 };
-
   function focusInput() {
     document.getElementById("livaraInput").focus();
   }
@@ -471,17 +469,43 @@
         const btn = document.createElement("button");
         btn.textContent = option;
 
-        btn.onclick = () => {
-          const key = option.toLowerCase();
-          const link = ACTION_LINKS[key];
+       btn.onclick = () => {
+  const key = option.toLowerCase();
 
-          if (link && !link.includes("PASTE_YOUR")) {
-            window.location.href = link;
-          } else {
-            input.value = option;
-            responseText.textContent = "You selected: " + option + ". This action will be connected soon.";
-          }
-        };
+  // 🔥 FUNDING SPLIT LOGIC
+  if (key === "get funding") {
+    responseText.textContent = "What kind of funding are you looking for?";
+
+    optionButtons.innerHTML = "";
+
+    const subOptions = [
+      { text: "Personal loans & funding", link: "https://www.lendingtree.com/personal/" },
+      { text: "Business funding", link: "https://www.sba.gov/funding-programs/loans" },
+      { text: "Emergency assistance (211)", link: "https://www.211.org" }
+    ];
+
+    subOptions.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt.text;
+      btn.onclick = () => {
+        window.location.href = opt.link;
+      };
+      optionButtons.appendChild(btn);
+    });
+
+    return;
+  }
+
+  // 🔗 NORMAL ROUTING
+  const link = ACTION_LINKS[key];
+
+  if (link && !link.includes("PASTE_YOUR")) {
+    window.location.href = link;
+  } else {
+    input.value = option;
+    responseText.textContent = "You selected: " + option + ". This action will be connected soon.";
+  }
+};
 
         optionButtons.appendChild(btn);
       });
