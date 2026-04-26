@@ -304,12 +304,11 @@
     <aside class="sidebar">
       <div class="logo"><span>∞</span> LIVARA</div>
 
-     <div class="nav-item active" onclick="quickAsk('What can you help me with today?')">Home</div>
-<div class="nav-item" onclick="quickAsk('I need food')">Food</div>
-<div class="nav-item" onclick="quickAsk('I need money')">Money</div>
-<div class="nav-item" onclick="quickAsk('I need help with my credit')">Credit & Documents</div>
-<div class="nav-item" onclick="quickAsk('I need housing help')">Housing</div>
-<div class="nav-item" onclick="quickAsk('I need a job')">Work</div>
+    <div class="nav-item" onclick="quickAsk('Help me find food options near me')">Food & Meals</div>
+<div class="nav-item" onclick="quickAsk('Help me with money, bills, income, or funding')">Money Support</div>
+<div class="nav-item" onclick="quickAsk('Help me create or choose the right document')">Credit & Documents</div>
+<div class="nav-item" onclick="quickAsk('Help me with housing, rental applications, or landlord letters')">Housing Help</div>
+<div class="nav-item" onclick="quickAsk('Help me with jobs, resumes, or interview preparation')">Work & Career</div>
       
       <div class="help-card">
         <h3>Need Immediate Help?</h3>
@@ -353,35 +352,35 @@
           <div class="icon orange">🍽</div>
           <h3>Food</h3>
           <p>Find meals, groceries, and food support.</p>
-          <button onclick="quickAsk('I need food')">Explore</button>
+         <button onclick="quickAsk('Help me find food options near me')">Explore</button>
         </div>
 
         <div class="card">
           <div class="icon green">$</div>
           <h3>Money</h3>
           <p>Get financial help, funding, and budgeting.</p>
-          <button onclick="quickAsk('I need money')">Explore</button>
+<button onclick="quickAsk('Help me with money, bills, income, or funding')">Explore</button>
         </div>
 
         <div class="card">
           <div class="icon purple">📄</div>
           <h3>Credit & Documents</h3>
           <p>Letters, disputes, and credit help.</p>
-          <button onclick="quickAsk('I need help with my credit')">Explore</button>
+          <button onclick="quickAsk('Help me create or choose the right document')">Explore</button>
         </div>
 
         <div class="card">
           <div class="icon blue">🏠</div>
           <h3>Housing</h3>
           <p>Find housing, shelter, and support.</p>
-          <button onclick="quickAsk('I need housing help')">Explore</button>
+         <button onclick="quickAsk('Help me with housing, rental applications, or landlord letters')">Explore</button>
         </div>
 
         <div class="card">
           <div class="icon pink">💼</div>
           <h3>Work</h3>
           <p>Find jobs, build resumes, and prepare.</p>
-          <button onclick="quickAsk('I need a job')">Explore</button>
+         <button onclick="quickAsk('Help me with jobs, resumes, or interview preparation')">Explore</button>
         </div>
       </section>
 
@@ -415,6 +414,8 @@ const ACTION_LINKS = {
 
   // Work
   "find jobs": "https://www.indeed.com",
+  "build resume": "https://getformatflow.com",
+  "practice interview": "https://grow.google/certificates/interview-warmup/",
 
   // Food
   "fast": "https://www.google.com/maps/search/fast+food+near+me",
