@@ -304,13 +304,13 @@
     <aside class="sidebar">
       <div class="logo"><span>∞</span> LIVARA</div>
 
-      <div class="nav-item active">Home</div>
-      <div class="nav-item">Food</div>
-      <div class="nav-item">Money</div>
-      <div class="nav-item">Credit & Documents</div>
-      <div class="nav-item">Housing</div>
-      <div class="nav-item">Work</div>
-
+     <div class="nav-item active" onclick="quickAsk('What can you help me with today?')">Home</div>
+<div class="nav-item" onclick="quickAsk('I need food')">Food</div>
+<div class="nav-item" onclick="quickAsk('I need money')">Money</div>
+<div class="nav-item" onclick="quickAsk('I need help with my credit')">Credit & Documents</div>
+<div class="nav-item" onclick="quickAsk('I need housing help')">Housing</div>
+<div class="nav-item" onclick="quickAsk('I need a job')">Work</div>
+      
       <div class="help-card">
         <h3>Need Immediate Help?</h3>
         <p>Livara is here to guide you toward the next best step.</p>
@@ -529,7 +529,37 @@ const ACTION_LINKS = {
 
   return;
 }
+        
+// MAIN CATEGORY BUTTONS
+if (key === "housing") {
+  input.value = "I need housing help";
+  askLivara();
+  return;
+}
 
+if (key === "food") {
+  input.value = "I need food";
+  askLivara();
+  return;
+}
+
+if (key === "money") {
+  input.value = "I need money";
+  askLivara();
+  return;
+}
+
+if (key === "documents") {
+  input.value = "I need help with documents";
+  askLivara();
+  return;
+}
+
+if (key === "work") {
+  input.value = "I need work help";
+  askLivara();
+  return;
+}
   // 🔗 NORMAL ROUTING
   const link = ACTION_LINKS[key];
 
