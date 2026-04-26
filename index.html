@@ -507,6 +507,28 @@ const ACTION_LINKS = {
 
     return;
   }
+         if (key === "create landlord letter") {
+  responseText.textContent = "What type of landlord letter do you need?";
+
+  optionButtons.innerHTML = "";
+
+  const subOptions = [
+    { text: "Repair request letter", link: "https://getformatflow.com" },
+    { text: "Rent hardship letter", link: "https://getformatflow.com" },
+    { text: "Move-out notice letter", link: "https://getformatflow.com" }
+  ];
+
+  subOptions.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      window.location.href = opt.link;
+    };
+    optionButtons.appendChild(btn);
+  });
+
+  return;
+}
 
   // 🔗 NORMAL ROUTING
   const link = ACTION_LINKS[key];
