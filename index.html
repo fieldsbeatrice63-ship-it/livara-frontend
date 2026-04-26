@@ -304,7 +304,8 @@
     <aside class="sidebar">
       <div class="logo"><span>∞</span> LIVARA</div>
 
-    <div class="nav-item" onclick="quickAsk('Help me find food options near me')">Food & Meals</div>
+   <div class="nav-item active" onclick="goHome()">Home</div>
+<div class="nav-item" onclick="quickAsk('Help me find food options near me')">Food & Meals</div>
 <div class="nav-item" onclick="quickAsk('Help me with money, bills, income, or funding')">Money Support</div>
 <div class="nav-item" onclick="quickAsk('Help me create or choose the right document')">Credit & Documents</div>
 <div class="nav-item" onclick="quickAsk('Help me with housing, rental applications, or landlord letters')">Housing Help</div>
@@ -313,7 +314,7 @@
       <div class="help-card">
         <h3>Need Immediate Help?</h3>
         <p>Livara is here to guide you toward the next best step.</p>
-        <button onclick="focusInput()">Talk to Livara</button>
+        <button onclick="startLivaraGuidance()">Talk to Livara</button>
       </div>
     </aside>
 
@@ -430,6 +431,48 @@ const ACTION_LINKS = {
     document.getElementById("livaraInput").value = message;
     askLivara();
   }
+    function goHome() {
+  const responseBox = document.getElementById("livaraResponse");
+  const responseText = document.getElementById("responseText");
+  const optionButtons = document.getElementById("optionButtons");
+
+  document.getElementById("livaraInput").value = "";
+
+  responseBox.style.display = "block";
+  responseText.textContent =
+    "Welcome back. Tell me what you need, and I’ll guide you to the right next step.";
+
+  optionButtons.innerHTML = "";
+}
+
+function startLivaraGuidance() {
+  const responseBox = document.getElementById("livaraResponse");
+  const responseText = document.getElementById("responseText");
+  const optionButtons = document.getElementById("optionButtons");
+
+  responseBox.style.display = "block";
+  responseText.textContent =
+    "Let’s get you where you need to go. What do you want help with first?";
+
+  optionButtons.innerHTML = "";
+
+  const options = [
+    { text: "Food & Meals", message: "Help me find food options near me" },
+    { text: "Money Support", message: "Help me with money, bills, income, or funding" },
+    { text: "Credit & Documents", message: "Help me create or choose the right document" },
+    { text: "Housing Help", message: "Help me with housing, rental applications, or landlord letters" },
+    { text: "Work & Career", message: "Help me with jobs, resumes, or interview preparation" }
+  ];
+
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      quickAsk(opt.message);
+    };
+    optionButtons.appendChild(btn);
+  });
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("livaraInput");
