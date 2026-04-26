@@ -301,97 +301,113 @@
 
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo"><span>∞</span> LIVARA</div>
+   <aside class="sidebar">
+  <div class="logo"><span>∞</span> LIVARA</div>
 
-   <div class="nav-item active" onclick="goHome()">Home</div>
-<div class="nav-item" onclick="quickAsk('Help me find food options near me')">Food & Meals</div>
-<div class="nav-item" onclick="quickAsk('Help me with money, bills, income, or funding')">Money Support</div>
-<div class="nav-item" onclick="quickAsk('Help me create or choose the right document')">Credit & Documents</div>
-<div class="nav-item" onclick="quickAsk('Help me with housing, rental applications, or landlord letters')">Housing Help</div>
-<div class="nav-item" onclick="quickAsk('Help me with jobs, resumes, or interview preparation')">Work & Career</div>
-      
-      <div class="help-card">
-        <h3>Need Immediate Help?</h3>
-        <p>Livara is here to guide you toward the next best step.</p>
-        <button onclick="startLivaraGuidance()">Talk to Livara</button>
-      </div>
-    </aside>
+  <div class="nav-item active" onclick="goHome()">Home</div>
 
-    <main class="main">
-      <div class="topbar">
-        <strong>Hello 👋</strong>
-      </div>
+  <div class="nav-item" onclick="quickAsk('Find food near me or food assistance')">
+    Food & Meals
+  </div>
 
-      <section class="hero">
-        <div class="symbol">∞</div>
-        <h1>LIVARA</h1>
-        <p>Your AI Assistant for Real-Life Support</p>
-      </section>
+  <div class="nav-item" onclick="quickAsk('Help me with bills, income, or financial support')">
+    Money Support
+  </div>
 
-      <div class="chat-bubble">
-        <strong>Hi, I’m Livara.</strong><br>
-        I can help you find the right resources, documents, and guidance.
-        What do you need today?
-      </div>
+  <div class="nav-item" onclick="quickAsk('I need help with credit dispute, debt validation, or documents')">
+    Credit & Documents
+  </div>
 
-      <div class="input-wrap">
-        <input id="livaraInput" type="text" placeholder="Type your request here..." />
-        <button onclick="askLivara()">➤</button>
-      </div>
+  <div class="nav-item" onclick="quickAsk('I need help finding a home, rental application, or landlord assistance')">
+    Housing Help
+  </div>
 
-      <div id="livaraResponse" class="response-box">
-        <h3>Livara says:</h3>
-        <p id="responseText"></p>
-        <div id="optionButtons" class="option-buttons"></div>
-      </div>
+  <div class="nav-item" onclick="quickAsk('I need a job, resume help, or interview preparation')">
+    Work & Career
+  </div>
 
-      <div class="section-title">How can I help you today?</div>
+  <div class="help-card">
+    <h3>Need Immediate Help?</h3>
+    <p>Livara is here to guide you toward the next best step.</p>
+    <button onclick="startLivaraGuidance()">Talk to Livara</button>
+  </div>
+</aside>
 
-      <section class="cards">
-        <div class="card">
-          <div class="icon orange">🍽</div>
-          <h3>Food</h3>
-          <p>Find meals, groceries, and food support.</p>
-         <button onclick="quickAsk('Help me find food options near me')">Explore</button>
-        </div>
+<main class="main">
+  <div class="topbar">
+    <strong>Hello 👋</strong>
+  </div>
 
-        <div class="card">
-          <div class="icon green">$</div>
-          <h3>Money</h3>
-          <p>Get financial help, funding, and budgeting.</p>
-<button onclick="quickAsk('Help me with money, bills, income, or funding')">Explore</button>
-        </div>
+  <section class="hero">
+    <div class="symbol">∞</div>
+    <h1>LIVARA</h1>
+    <p>Your AI Assistant for Real-Life Support</p>
+  </section>
 
-        <div class="card">
-          <div class="icon purple">📄</div>
-          <h3>Credit & Documents</h3>
-          <p>Letters, disputes, and credit help.</p>
-          <button onclick="quickAsk('Help me create or choose the right document')">Explore</button>
-        </div>
+  <div class="chat-bubble">
+    <strong>Hi, I’m Livara.</strong><br>
+    I can help you find the right resources, documents, and guidance.
+    What do you need today?
+  </div>
 
-        <div class="card">
-          <div class="icon blue">🏠</div>
-          <h3>Housing</h3>
-          <p>Find housing, shelter, and support.</p>
-         <button onclick="quickAsk('Help me with housing, rental applications, or landlord letters')">Explore</button>
-        </div>
+  <div class="input-wrap">
+    <input id="livaraInput" type="text" placeholder="Type your request here..." />
+    <button onclick="askLivara()">➤</button>
+  </div>
 
-        <div class="card">
-          <div class="icon pink">💼</div>
-          <h3>Work</h3>
-          <p>Find jobs, build resumes, and prepare.</p>
-         <button onclick="quickAsk('Help me with jobs, resumes, or interview preparation')">Explore</button>
-        </div>
-      </section>
+  <div id="livaraResponse" class="response-box">
+    <h3>Livara says:</h3>
+    <p id="responseText"></p>
+    <div id="optionButtons" class="option-buttons"></div>
+  </div>
 
-      <div class="footer-note">
-        You’re not alone. Livara is here to help you take the next step.
-      </div>
-      <div class="footer-note">
-  Livara provides guidance and resource direction only. It does not guarantee approvals, outcomes, legal results, financial results, housing acceptance, employment, funding, or credit changes.
-</div>
-    </main>
+  <div class="section-title">How can I help you today?</div>
+
+  <section class="cards">
+    <div class="card">
+      <div class="icon orange">🍽</div>
+      <h3>Food</h3>
+      <p>Find meals, groceries, and food support.</p>
+      <button onclick="quickAsk('Find food near me or food assistance')">Explore</button>
+    </div>
+
+    <div class="card">
+      <div class="icon green">$</div>
+      <h3>Money</h3>
+      <p>Get financial help, funding, and income support.</p>
+      <button onclick="quickAsk('Help me with bills, income, or financial support')">Explore</button>
+    </div>
+
+    <div class="card">
+      <div class="icon purple">📄</div>
+      <h3>Credit & Documents</h3>
+      <p>Letters, disputes, and credit solutions.</p>
+      <button onclick="quickAsk('I need help with credit dispute, debt validation, or documents')">Explore</button>
+    </div>
+
+    <div class="card">
+      <div class="icon blue">🏠</div>
+      <h3>Housing</h3>
+      <p>Find housing, apply, or get landlord support.</p>
+      <button onclick="quickAsk('I need help finding a home, rental application, or landlord assistance')">Explore</button>
+    </div>
+
+    <div class="card">
+      <div class="icon pink">💼</div>
+      <h3>Work</h3>
+      <p>Find jobs, build resumes, and prepare for interviews.</p>
+      <button onclick="quickAsk('I need a job, resume help, or interview preparation')">Explore</button>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    You’re not alone. Livara is here to help you take the next step.
+  </div>
+
+  <div class="footer-note">
+    Livara provides guidance and resource direction only. It does not guarantee approvals, outcomes, legal results, financial results, housing acceptance, employment, funding, or credit changes.
+  </div>
+</main>
   </div>
 
   <script>
