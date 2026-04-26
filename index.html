@@ -428,7 +428,9 @@ const ACTION_LINKS = {
   "find housing": "https://www.zillow.com",
   "rental application help": "https://www.turbotenant.com/renters/",
   "create landlord letter": "https://getformatflow.com",
-
+"extended stays near me": "https://www.google.com/maps/search/extended+stay+hotels+near+me",
+  "airbnb near me": "https://www.airbnb.com/s/homes",
+  "housing assistance": "https://www.211.org"
   // Work
   "find jobs": "https://www.indeed.com",
   "build resume": "https://getformatflow.com",
@@ -619,6 +621,30 @@ if (key === "documents") {
 if (key === "work") {
   input.value = "I need work help";
   askLivara();
+  return;
+}
+
+         // EMERGENCY HOUSING
+if (key === "emergency housing") {
+  responseText.textContent = "Let’s get you somewhere safe and immediate.";
+
+  optionButtons.innerHTML = "";
+
+  const subOptions = [
+    { text: "Extended stays near me", link: ACTION_LINKS["extended stays near me"] },
+    { text: "Airbnb near me", link: ACTION_LINKS["airbnb near me"] },
+    { text: "Housing assistance", link: ACTION_LINKS["housing assistance"] }
+  ];
+
+  subOptions.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => {
+      window.location.href = opt.link;
+    };
+    optionButtons.appendChild(btn);
+  });
+
   return;
 }
   // 🔗 NORMAL ROUTING
