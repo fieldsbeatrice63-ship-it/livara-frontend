@@ -392,68 +392,100 @@
   </div>
 
   <script>
-    const LIVARA_BACKEND_URL = "https://livara-backend.onrender.com/api/livara/decide";
+  const LIVARA_BACKEND_URL = "https://livara-backend.onrender.com/api/livara/decide";
 
-    function focusInput() {
-      document.getElementById("livaraInput").focus();
+  const FORMATFLOW_URL = "https://getformatflow.com";
+  const ACTION_LINKS = {
+    "credit dispute letter": FORMATFLOW_URL,
+    "debt validation letter": FORMATFLOW_URL,
+    "proof of income letter": FORMATFLOW_URL,
+    "find jobs": "https://www.indeed.com",
+    "find housing": "https://www.zillow.com",
+    "fast": "https://www.google.com/maps/search/fast+food+near+me",
+    "affordable": "https://www.google.com/maps/search/cheap+food+near+me",
+    "healthy": "https://www.google.com/maps/search/healthy+food+near+me"
+  };
+
+  function focusInput() {
+    document.getElementById("livaraInput").focus();
+  }
+
+  function quickAsk(message) {
+    document.getElementById("livaraInput").value = message;
+    askLivara();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("livaraInput");
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        askLivara();
+      }
+    });
+  });
+
+  async function askLivara() {
+    const input = document.getElementById("livaraInput");
+    const responseBox = document.getElementById("livaraResponse");
+    const responseText = document.getElementById("responseText");
+    const optionButtons = document.getElementById("optionButtons");
+
+    const message = input.value.trim();
+
+    if (!message) {
+      responseBox.style.display = "block";
+      responseText.textContent = "Tell me what you need today, and I’ll help narrow it down.";
+      optionButtons.innerHTML = "";
+      return;
     }
 
-    function quickAsk(message) {
-      document.getElementById("livaraInput").value = message;
-      askLivara();
-    }
+    responseBox.style.display = "block";
+    responseText.textContent = "Livara is thinking...";
+    optionButtons.innerHTML = "";
 
-    async function askLivara() {
-      const input = document.getElementById("livaraInput");
-      const responseBox = document.getElementById("livaraResponse");
-      const responseText = document.getElementById("responseText");
-      const optionButtons = document.getElementById("optionButtons");
+    try {
+      const res = await fetch(LIVARA_BACKEND_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message })
+      });
 
-      const message = input.value.trim();
+      const data = await res.json();
 
-      if (!message) {
-        responseBox.style.display = "block";
-        responseText.textContent = "Tell me what you need today, and I’ll help narrow it down.";
-        optionButtons.innerHTML = "";
+      if (!data.success) {
+        responseText.textContent = data.error || "Something went wrong.";
         return;
       }
 
-      responseBox.style.display = "block";
-      responseText.textContent = "Livara is thinking...";
-      optionButtons.innerHTML = "";
+      responseText.textContent = data.reply;
 
-      try {
-        const res = await fetch(LIVARA_BACKEND_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ message })
-        });
+      data.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
 
-        const data = await res.json();
+        btn.onclick = () => {
+          const key = option.toLowerCase();
+          const link = ACTION_LINKS[key];
 
-        if (!data.success) {
-          responseText.textContent = data.error || "Something went wrong.";
-          return;
-        }
-
-        responseText.textContent = data.reply;
-
-        data.options.forEach(option => {
-          const btn = document.createElement("button");
-          btn.textContent = option;
-          btn.onclick = () => {
+          if (link && !link.includes("PASTE_YOUR")) {
+            window.location.href = link;
+          } else {
             input.value = option;
-            responseText.textContent = "You selected: " + option;
-          };
-          optionButtons.appendChild(btn);
-        });
+            responseText.textContent = "You selected: " + option + ". This action will be connected soon.";
+          }
+        };
 
-      } catch (error) {
-        responseText.textContent = "I could not connect to Livara right now. Please check the backend URL.";
-      }
+        optionButtons.appendChild(btn);
+      });
+
+    } catch (error) {
+      responseText.textContent = "I could not connect to Livara right now. Please check the backend URL.";
     }
-  </script>
+  }
+</script>
+   
 </body>
 </html>
